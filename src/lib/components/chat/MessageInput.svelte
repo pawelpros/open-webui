@@ -80,7 +80,9 @@
 	import Voice from '../icons/Voice.svelte';
 	import Terminal from '../icons/Terminal.svelte';
 	import IntegrationsMenu from './MessageInput/IntegrationsMenu.svelte';
+	import AttestationMenu from './MessageInput/AttestationMenu.svelte';
 	import Component from '../icons/Component.svelte';
+
 	import PlusAlt from '../icons/PlusAlt.svelte';
 
 	import CommandSuggestionList from './MessageInput/CommandSuggestionList.svelte';
@@ -1541,6 +1543,12 @@
 										</IntegrationsMenu>
 									{/if}
 
+									<div
+											class="flex self-center w-[1px] h-4 mx-1 bg-gray-200/50 dark:bg-gray-800/50"
+										/>
+									<AttestationMenu>
+
+									</AttestationMenu>
 									{#if selectedModelIds.length === 1 && $models.find((m) => m.id === selectedModelIds[0])?.has_user_valves}
 										<div class="ml-1 flex gap-1.5">
 											<Tooltip content={$i18n.t('Valves')} placement="top">
