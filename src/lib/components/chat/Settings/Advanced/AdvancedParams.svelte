@@ -35,7 +35,7 @@
 		repeat_last_n: null,
 		tfs_z: null,
 		repeat_penalty: null,
-		use_mmap: null,
+		use_mmap: false,
 		use_mlock: null,
 		think: null,
 		format: null,
@@ -1153,10 +1153,10 @@
 						class="p-1 px-3 text-xs flex rounded-sm transition shrink-0 outline-hidden"
 						type="button"
 						on:click={() => {
-							params.use_mmap = (params?.use_mmap ?? null) === null ? true : null;
+							params.use_mmap = params.use_mmap === false ? true : false;
 						}}
 					>
-						{#if (params?.use_mmap ?? null) === null}
+						{#if params.use_mmap === false}
 							<span class="ml-2 self-center">{$i18n.t('Default')}</span>
 						{:else}
 							<span class="ml-2 self-center">{$i18n.t('Custom')}</span>
@@ -1165,7 +1165,7 @@
 				</div>
 			</Tooltip>
 
-			{#if (params?.use_mmap ?? null) !== null}
+			{#if params.use_mmap === true}
 				<div class="flex justify-between items-center mt-1">
 					<div class="text-xs text-gray-500">
 						{params.use_mmap ? $i18n.t('Enabled') : $i18n.t('Disabled')}

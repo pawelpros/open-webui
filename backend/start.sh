@@ -79,9 +79,17 @@ else
     ARGS=(--workers "$UVICORN_WORKERS")
 fi
 
+# Build SSL arguments if certificates are provided
+SSL_ARGS=()
+if [ -n "$SSL_CERTFILE" ] && [ -n "$SSL_KEYFILE" ]; then
+    echo "SSL enabled with cert: $SSL_CERTFILE"
+    SSL_ARGS=(--ssl-certfile "$SSL_CERTFILE" --ssl-keyfile "$SSL_KEYFILE")
+fi
+
 # Run uvicorn
 WEBUI_SECRET_KEY="$WEBUI_SECRET_KEY" exec "$PYTHON_CMD" -m uvicorn open_webui.main:app \
     --host "$HOST" \
     --port "$PORT" \
     --forwarded-allow-ips '*' \
+    "${SSL_ARGS[@]}" \
     "${ARGS[@]}"
